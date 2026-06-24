@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  it-support:
+    build: .
+    container_name: it-support
+    environment:
+      - OPENCODE_API_KEY=${OPEN...Y}
+      - OPENCODE_MODEL=deepseek-v4-flash
+      - OPENCODE_BASE_URL=https://opencode.ai/zen/go/v1
+    restart: unless-stopped
+    entrypoint: ["tail", "-f", "/dev/null"]

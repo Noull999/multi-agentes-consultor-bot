@@ -21,12 +21,19 @@ cd multi-agentes
 ./agente.sh
 ```
 
-### Con Docker
+### Con Docker (proyecto individual)
+```bash
+cd code-review-bot
+cp .env.docker .env  # editar con tu API key
+docker compose up -d
+# Usar: docker exec code-review python src/main.py /ruta/proyecto --opencode
+```
+
+### Con Docker (todo junto - API REST)
 ```bash
 cp .env.docker .env
-# Editar .env con API key de OpenCode Go
 docker compose up -d
-# Abrir http://localhost:8000
+# API en http://localhost:8000
 ```
 
 ### API REST (con Docker)

@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  code-review:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: code-review-bot
+    command: tail -f /dev/null  # keeps container alive, run agents via docker exec
+    environment:
+      - OPENCODE_API_KEY=${OPEN...-}
+      - OPENCODE_MODEL=kimi-k2.7-code
+      - OPENCODE_BASE_URL=https://opencode.ai/zen/go/v1
+    volumes:
+      - ./code-review-bot:/app/code-review-bot
+      - /root/projects:/host/projects:ro
+    working_dir: /app/code-review-bot
+    restart: unless-stopped
+    profiles:
+      - code-review
+      - all

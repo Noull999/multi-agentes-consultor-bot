@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  code-review:
+    build: .
+    container_name: code-review
+    environment:
+      - OPENCODE_API_KEY=${OPENCODE_API_KEY}
+      - OPENCODE_MODEL=kimi-k2.7-code
+      - OPENCODE_BASE_URL=https://opencode.ai/zen/go/v1
+    volumes:
+      - /root/projects:/host/projects:ro
+    working_dir: /app
+    restart: unless-stopped
+    entrypoint: ["tail", "-f", "/dev/null"]
