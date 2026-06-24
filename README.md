@@ -1,46 +1,57 @@
-# Multi-Agentes — Proyectos CrewAI
+# 🤖 Multi-Agentes
 
-Proyectos de prueba con sistemas multi-agente usando CrewAI v1.14+.
+**3 sistemas multi-agente con CrewAI + OpenCode Go**
 
-## Proyectos
+Repositorio unificado con 3 herramientas de IA orquestadas, API REST, Docker Compose y menú interactivo.
 
-| # | Proyecto | Descripción |
+## 📦 Proyectos
+
+| Proyecto | Agentes | Input → Output |
 |---|---|---|
-| 1 | `code-review-bot/` | Revisa código fuente, busca bugs, issues de estilo y sugiere documentación |
-| 2 | `it-support-bot/` | Diagnostica problemas IT, busca soluciones y genera reportes de soporte |
+| 🔍 **Code Review Bot** | 4 | Ruta de proyecto → Reporte de bugs + estilo + docs |
+| 🛠️ **IT Support Bot** | 4 | Problema técnico → Diagnóstico + plan de solución |
+| 🎯 **Consultor Full-Stack** | 5 | Descripción de cliente → Propuesta + código base |
 
-## Configuración general
+## 🚀 Cómo usar
 
-Cada proyecto tiene su propio `.env`. Copia desde `.env.example`:
-
+### Desde terminal
 ```bash
-cp .env.example .env
-# Edita .env con tu API key
+git clone https://github.com/Noull999/multi-agentes.git
+cd multi-agentes
+./agente.sh
 ```
 
-### Opción A: Gemini (recomendado — gratis)
-```
-OPENAI_API_KEY=AIzaSy...tu-key-de-gemini
-OPENAI_API_BASE=https://generativelanguage.googleapis.com/v1beta/openai/
-OPENAI_MODEL_NAME=gemini-2.5-pro
-```
-
-### Opción B: OpenAI
-```
-OPENAI_API_KEY=sk-proj-...
-OPENAI_MODEL_NAME=gpt-4o
-```
-
-### Opción C: Local con Ollama
-```
-OPENAI_API_KEY=ollama
-OPENAI_API_BASE=http://localhost:11434/v1
-OPENAI_MODEL_NAME=llama4
-```
-
-## Cómo ejecutar
-
+### Con Docker
 ```bash
-cd code-review-bot
-python src/main.py --help
+cp .env.docker .env
+# Editar .env con API key de OpenCode Go
+docker compose up -d
+# Abrir http://localhost:8000
 ```
+
+### API REST (con Docker)
+```
+POST /api/code-review  → body: {"path": "/proyecto", "model": "kimi-k2.7-code"}
+POST /api/it-support   → body: {"issue": "PC no enciende"}
+POST /api/consultor    → body: {"description": "App para restaurant..."}
+```
+
+## 🧠 Modelos recomendados
+
+| Proyecto | Modelo |
+|---|---|
+| Code Review Bot | `kimi-k2.7-code` |
+| IT Support Bot | `deepseek-v4-flash` |
+| Consultor Full-Stack | `kimi-k2.7-code` |
+
+## 🛠 Stack
+
+- **Python 3.12** + CrewAI 1.14
+- **OpenCode Go** (endpoint OpenAI-compatible)
+- **FastAPI** (REST API)
+- **Docker Compose**
+- Alternativas: Gemini (gratis), OpenAI
+
+## 📄 Licencia
+
+MIT
